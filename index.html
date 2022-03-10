@@ -298,7 +298,7 @@ mjx-container[display="true"] + br {
       <span class="post-meta-item-text">Posted on</span>
       
 
-      <time title="Created: 2022-03-10 00:00:00 / Modified: 15:40:55" itemprop="dateCreated datePublished" datetime="2022-03-10T00:00:00+08:00">2022-03-10</time>
+      <time title="Created: 2022-03-10 00:00:00 / Modified: 15:44:21" itemprop="dateCreated datePublished" datetime="2022-03-10T00:00:00+08:00">2022-03-10</time>
     </span>
 
   
@@ -311,11 +311,14 @@ mjx-container[display="true"] + br {
     
     
     <div class="post-body" itemprop="articleBody">
-          <p> 题目：<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/solving-questions-with-brainpower">https://leetcode-cn.com/problems/solving-questions-with-brainpower</a></p>
+          <p>题目：https://leetcode-cn.com/problems/solving-questions-with-brainpower</p>
 <p>给你一个下标从 0 开始的二维整数数组 questions ，其中 questions[i] = [pointsi, brainpoweri] 。</p>
-<p>这个数组表示一场考试里的一系列题目，你需要 按顺序 （也就是从问题 0 开始依次解决），针对每个问题选择 解决 或者 跳过 操作。解决问题 i 将让你 获得  pointsi 的分数，但是你将 无法 解决接下来的 brainpoweri 个问题（即只能跳过接下来的 brainpoweri 个问题）。如果你跳过问题 i ，你可以对下一个问题决定使用哪种操作。</p>
-<p>比方说，给你 questions = [[3, 2], [4, 3], [4, 4], [2, 5]] ：<br>如果问题 0 被解决了， 那么你可以获得 3 分，但你不能解决问题 1 和 2 。<br>如果你跳过问题 0 ，且解决问题 1 ，你将获得 4 分但是不能解决问题 2 和 3 。<br>请你返回这场考试里你能获得的 最高 分数。</p>
-<h3 id="倒序dp入门"><a href="#倒序dp入门" class="headerlink" title="倒序dp入门"></a>倒序dp入门</h3><p><img src="C:\Users\Administrator\Desktop\BLOG\source\img\题解\image-20220310152851589.png" alt="image-20220310152851589"></p>
+<p>这个数组表示一场考试里的一系列题目，你需要 按顺序 （也就是从问题 0 开始依次解决），针对每个问题选择 解决 或者 跳过 操作。解决问题 i 将让你 获得 pointsi 的分数，但是你将 无法 解决接下来的 brainpoweri 个问题（即只能跳过接下来的 brainpoweri 个问题）。如果你跳过问题 i ，你可以对下一个问题决定使用哪种操作。</p>
+<p>比方说，给你 questions = [[3, 2], [4, 3], [4, 4], [2, 5]] ： 如果问题 0 被解决了， 那么你可以获得 3 分，但你不能解决问题 1 和 2 。 如果你跳过问题 0 ，且解决问题 1 ，你将获得 4 分但是不能解决问题 2 和 3 。 请你返回这场考试里你能获得的 最高 分数。</p>
+<h3 id="倒序dp入门">倒序dp入门</h3>
+<figure>
+<img src="/img/%E9%A2%98%E8%A7%A3/image-20220310154416167-16468982597031.png" alt="image-20220310154416167" /><figcaption>image-20220310154416167</figcaption>
+</figure>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="type">static</span> <span class="type">const</span> <span class="type">int</span> maxn=<span class="number">2e5</span>+<span class="number">10</span>;</span><br><span class="line">    <span class="type">long</span> <span class="type">long</span> dp[maxn]=&#123;<span class="number">0</span>&#125;;</span><br><span class="line">    <span class="function"><span class="type">long</span> <span class="type">long</span> <span class="title">mostPoints</span><span class="params">(vector&lt;vector&lt;<span class="type">int</span>&gt;&gt;&amp; questions)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=questions.<span class="built_in">size</span>()<span class="number">-1</span>;i&gt;=<span class="number">0</span>;i--)&#123;</span><br><span class="line">            dp[i]=<span class="built_in">max</span>(dp[i+questions[i][<span class="number">1</span>]+<span class="number">1</span>]+questions[i][<span class="number">0</span>],dp[i+<span class="number">1</span>]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> dp[<span class="number">0</span>];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
       
